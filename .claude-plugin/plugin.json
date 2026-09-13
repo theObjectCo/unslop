@@ -1,0 +1,22 @@
+{
+  "name": "unslop",
+  "displayName": "Unslop",
+  "version": "0.1.0",
+  "description": "Writing rules that keep prose from reading as generated, a corpus of rejected sentences with their replacements, and a checker script.",
+  "author": {
+    "name": "Object",
+    "url": "https://github.com/theObjectCo"
+  },
+  "homepage": "https://github.com/theObjectCo/unslop",
+  "repository": "https://github.com/theObjectCo/unslop",
+  "license": "MIT",
+  "keywords": [
+    "writing",
+    "style",
+    "prose",
+    "documentation",
+    "editing",
+    "commit-messages",
+    "code-comments"
+  ]
+}

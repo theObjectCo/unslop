@@ -1,0 +1,27 @@
+{
+  "name": "unslop",
+  "owner": {
+    "name": "Object",
+    "url": "https://github.com/theObjectCo"
+  },
+  "plugins": [
+    {
+      "name": "unslop",
+      "source": "./",
+      "description": "Writing rules that keep prose from reading as generated, a corpus of rejected sentences with their replacements, and a checker script.",
+      "version": "0.1.0",
+      "license": "MIT",
+      "author": {
+        "name": "Object",
+        "url": "https://github.com/theObjectCo"
+      },
+      "keywords": [
+        "writing",
+        "style",
+        "prose",
+        "documentation",
+        "editing"
+      ]
+    }
+  ]
+}

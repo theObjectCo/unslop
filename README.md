@@ -16,9 +16,16 @@ Nothing here is tied to one product. `SKILL.md`, `AGENTS.md` and `anti-patterns.
 The only part that follows a vendor convention is the YAML header on `SKILL.md`, which is what makes
 Claude Code load it without being asked.
 
-## Claude Code and Claude.ai
+## Claude Code
 
-Clone into a skills directory and it loads on the next session, or on request with `/unslop`.
+As a plugin, which is one command and updates in place:
+
+```
+/plugin marketplace add theObjectCo/unslop
+/plugin install unslop@unslop
+```
+
+Or as a plain skill directory, which keeps the files visible and editable:
 
 ```
 # for every project on this machine
@@ -27,6 +34,10 @@ git clone https://github.com/theObjectCo/unslop ~/.claude/skills/unslop
 # for one repository, checked in with it
 git clone https://github.com/theObjectCo/unslop .claude/skills/unslop
 ```
+
+Either way it loads on its own when there is prose to write or revise, and on request with
+`/unslop`. The repository is both the skill and its own single-plugin marketplace, so the same
+files serve both routes.
 
 ## Other agents
 
