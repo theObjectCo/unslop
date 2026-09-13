@@ -99,6 +99,10 @@ spread spreads stand stands stood state states stated suggest suggests suggested
 switch switches switched teach teaches test tests tested track tracks tracked train trains
 trained transfer transfers treat treats treated understand understands update updates updated
 upload uploads validate validates verify verifies wrap wraps wrapped yield yields yielded
+override overrides overrode implement implements press presses click clicks type types declare
+declares compile compiles compiled restore restores restored disable disables copy copies paste
+pastes expose exposes derive derives inherit inherits annotate annotates drag drags drop drops
+edit edits edited dock docks docked bake bakes baked
 """.split())
 
 ABSTRACT_OPENERS = re.compile(
@@ -332,12 +336,16 @@ def main(argv):
     for name, line, level, rule, matched, why in reports:
         print("%s:%d  [%s] %-14s %-34s %s" % (name, line, level, rule, repr(matched)[:34], why))
 
-    # One of these is a choice. Six of them is the shape the skill is about, so say so.
-    for rule, limit, note in (("opposition", 4, "not X but Y"), ("triad", 4, "three item lists"),
-                              ("em dash", 3, "em dashes")):
-        count = sum(1 for f in reports if f[3] == rule)
-        if count >= limit:
-            print("\n%s appears %d times. One is a choice; %d is a habit." % (note, count, count))
+    # One of these is a choice. Six of them is the shape the skill is about, so say so. Counted per
+    # file, because a habit belongs to a document and pooling several would invent one.
+    for name in dict.fromkeys(f[0] for f in reports):
+        for rule, limit, note in (("opposition", 4, "not X but Y"),
+                                  ("triad", 4, "three item lists"),
+                                  ("em dash", 3, "em dashes")):
+            count = sum(1 for f in reports if f[0] == name and f[3] == rule)
+            if count >= limit:
+                print("\n%s: %s appears %d times. One is a choice; %d is a habit."
+                      % (name, note, count, count))
 
     hard = sum(1 for f in reports if f[2] == HARD)
     if reports:
