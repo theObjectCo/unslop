@@ -175,9 +175,21 @@ def findings_for(text, name):
             # A capitalised name with no path after it is a product, not an address: Claude.ai,
             # Framer.app. A real bare link is lower case, or carries a path.
             product = hit.group(0)[0].isupper() and not line[hit.end():hit.end() + 1] == "/"
-            if not product and "://" not in line[max(0, hit.start() - 8):hit.start()]:
-                out.append((number, HARD, "bare link", hit.group(0),
-                            "write links in full, with https://"))
+            if product or "://" in line[max(0, hit.start() - 8):hit.start()]:
+                continue
+
+            # A domain is an address when the sentence sends the reader to it, and a name when the
+            # sentence talks about it: "more at example.org/demo" against "hosted on example.org".
+            before = line[:hit.start()].lower()
+            after = line[hit.end():]
+            pointer = re.search(r"\b(at|from|see|visit|via)\s+$", before) is not None
+            destination = after.startswith("/") or re.match(r"\s*$|[.)\]]", after) is not None
+
+            level = HARD if pointer and destination else CHECK
+            out.append((number, level, "bare link", hit.group(0),
+                        "write an address in full, with https://"
+                        if level == HARD else
+                        "a link needs https://, a service named in passing does not"))
 
         if re.match(r"^\s*(Output|Result|Deliverable|Duration|Stack|Timeline|Scope)\s*:", line):
             out.append((number, HARD, "telegraph", line.strip()[:40],
