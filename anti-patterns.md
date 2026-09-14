@@ -194,6 +194,6 @@ Nothing in this sentence can be checked, and removing every adjective removes no
 
 > More at example.org/demo
 
-Fails to be clickable in plain text, in a terminal, in a form field and in a pasted note.
+Nothing makes it clickable in a terminal or in a pasted note.
 
 **Replaced with:** More at https://example.org/demo

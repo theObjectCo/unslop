@@ -152,9 +152,17 @@ def findings_for(text, name):
             out.append((number, CHECK, "opposition", hit.group(0).strip()[:50],
                         "fine once; a habit when it is the shape of every other sentence"))
 
-        for hit in re.finditer(r"\b[\w-]+,\s+[\w-]+\s+and\s+[\w-]+\b", line):
+        for hit in re.finditer(r"\b[\w-]+,\s+[\w-]+,?\s+and\s+[\w-]+\b", line):
             out.append((number, CHECK, "triad", hit.group(0)[:50],
                         "three items: check the count comes from the subject, not the rhythm"))
+
+        # Three or more parallel clauses, each of them several words long: "the facts can be right,
+        # the numbers checked, the structure sound". A plain list of names is not this, which is why
+        # every member has to carry at least three words before it counts.
+        member = r"[\w'`()-]+(?:\s+[\w'`()-]+){2,}"
+        for hit in re.finditer(r"(?:%s,\s+){2,}%s" % (member, member), line):
+            out.append((number, CHECK, "parallel", hit.group(0)[:50],
+                        "a run of parallel clauses, which is a triad with more members"))
 
         if re.search(r"\s—\s|\s--\s", line):
             out.append((number, CHECK, "em dash", "—",
@@ -183,6 +191,14 @@ def strip_code(lines):
     """Blanks out what is not the author's own prose: code blocks, indented code, block quotes."""
     kept = []
     fenced = False
+
+    # YAML front matter is metadata a machine reads, not prose a person reads.
+    if lines and lines[0].strip() == "---":
+        for index in range(1, len(lines)):
+            if lines[index].strip() == "---":
+                lines = [""] * (index + 1) + lines[index + 1:]
+                break
+
     for line in lines:
         if line.strip().startswith("```") or line.strip().startswith("~~~"):
             fenced = not fenced

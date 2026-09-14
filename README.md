@@ -1,12 +1,11 @@
 # Unslop
 
-A skill for Claude Code, and a script that runs on its own, for catching the patterns that make
-prose read as generated.
+A skill for Claude Code that catches the patterns making prose read as generated. The checker runs
+on its own too, with no agent involved.
 
-The tells are in the rhythm. A draft can be accurate and well organised and still announce itself
-through the shapes its sentences fall into: triads, closing punchlines, paired opposites, the
-alternation between reader and company, paragraphs where every sentence runs to the same length.
-Those shapes survive an edit for accuracy, because nothing in them is wrong.
+The tells are in the rhythm. A draft can be accurate and still announce itself through the shapes
+its sentences fall into. Those shapes survive an edit for accuracy, because nothing in them is
+wrong.
 
 `SKILL.md` is the rule set. `anti-patterns.md` is a corpus of rejected sentences with the version
 that replaced each one. `unslop.py` flags the patterns a regular expression can reach.
@@ -71,9 +70,9 @@ flagged. Exit status is 1 when there is at least one finding, so it works in a p
 
 Findings marked `HARD` are patterns that are almost never the right call: filler vocabulary, the
 transformation frame, bare links, label-and-value fragments, second person. Findings marked `CHECK`
-are candidates, and being flagged is not a verdict. Triads, oppositions and em dashes are counted
-across the whole file, and the script says so when the count crosses the line between a choice and a
-habit.
+are candidates, and being flagged is not a verdict. Triads, parallel clauses, oppositions and em
+dashes are also counted per file, and the script says so when a count crosses the line between a
+choice and a habit.
 
 Fenced code blocks, indented code and block quotes are skipped, and so is anything inside quotation
 marks or backticks, since that is how a document quotes the writing it is arguing against. The

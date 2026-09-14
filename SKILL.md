@@ -5,10 +5,9 @@ description: Rules for writing prose a person will actually read - documentation
 
 # Unslop
 
-Generated prose gives itself away through its rhythm. The facts can be right, the numbers checked,
-the structure sound, and the sentences still fall into shapes nobody writes unprompted: triads,
-closing punchlines, paired opposites, paragraphs of evenly weighted sentences. The list below covers
-those shapes, and `unslop.py` catches the ones a pattern can reach.
+Generated prose gives itself away through its rhythm. A draft can be accurate and still fall into
+shapes nobody writes unprompted. Nothing in those shapes is wrong, which is why they survive an edit
+for accuracy. The list below names them, and `unslop.py` catches the ones a pattern can reach.
 
 It applies to anything a person reads. Not only external copy: the same rhythm shows up in commit
 messages, in code comments, and in a status report written back to the person who asked for the
@@ -78,8 +77,7 @@ content, no flourish at the end. State a limitation outright instead of building
 
 ## Sets of texts
 
-Several entries side by side: a service list, a price list, a set of project descriptions, a
-marketplace profile.
+Several entries side by side, such as a price list or a set of project descriptions.
 
 - Each entry owns its subject and does not borrow sentences from its neighbour. The integration
   story belongs to the integration entry. Spread across every entry in small pieces, it leaves each
@@ -96,10 +94,11 @@ marketplace profile.
 ## Procedure
 
 1. Write it.
-2. Run `unslop.py` over the file, or pipe the text in. It flags the mechanical patterns: em dashes,
-   the transformation frame, filler vocabulary, first and second person, telegraphic fragments,
-   triads, bare links, uniform sentence length, punchline candidates. It does not catch
-   personification, aphoristic openers, or cadence, so those still have to be read.
+2. Run `unslop.py` over the file, or pipe the text in. It flags the mechanical patterns: filler
+   vocabulary, the transformation frame, first and second person, fragments without a verb, triads
+   and longer runs of parallel clauses, bare links, em dashes, punchline candidates and sentence
+   lengths that are too even. It does not catch personification, aphoristic openers or cadence, so
+   those still have to be read.
 3. Re-read for the five habits above.
 4. Give **one** corrected version. Not a menu of options, unless a choice was asked for.
 
